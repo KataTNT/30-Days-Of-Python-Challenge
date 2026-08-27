@@ -386,4 +386,36 @@ print('import', is_valid_var('import'))
 
 # 5. Go to the data folder and access the countries-data.py file.
 # - Create a function called the most_spoken_languages in the world. It should return 10 or 20 most spoken languages in the world in descending order.
+import json
+file = open("./data/countries-data.py", mode="r", encoding="utf-8")
+countries_data = json.load(file)
+def most_spoken_languages(countries_data, top_n=10):
+    all_languages = []
+    for country in countries_data:
+        all_languages.extend(country.get("languages", []))
+    all_languages_unique = set()
+    for language in all_languages:
+        all_languages_unique.add(language)
+    languages_counted = []
+    for language in all_languages_unique:
+        languages_counted.append({"language": language,"countries_count": all_languages.count(language)})
+    languages_counted.sort(key=lambda x: x["countries_count"], reverse=True)
+    top_languages = languages_counted[:top_n]
+    print(f'Top {top_n} most spoken languages:\n#\tLanguage - Countries')
+    for rank, language in enumerate(top_languages, start=1):
+        print(f'{rank}\t{language["language"]} - {language["countries_count"]}')
+    
+most_spoken_languages(countries_data)
+
 # - Create a function called the most_populated_countries. It should return 10 or 20 most populated countries in descending order.
+def most_populated_countries(countries_data, top_n=10):
+    population_data = []
+    for country in countries_data:
+        population_data.append({"name": country["name"], "population": country["population"]})
+    population_data.sort(key=lambda x: x["population"], reverse=True)
+    top_countries = population_data[:top_n]
+    print(f'Top {top_n} most populated countries:\n#\tCountry - Population')
+    for rank, country in enumerate(top_countries, start=1):
+        print(f'{rank}\t{country["name"]} - {country["population"]}')
+
+most_populated_countries(countries_data, 20)
