@@ -36,5 +36,5 @@ print(e5)
 # 6. Change the following list of lists to a list of concatenated strings:
 names = [[('Asabeneh', 'Yetayeh')], [('David', 'Smith')], [('Donald', 'Trump')], [('Bill', 'Gates')]]
 
-e6 = [ i + ' ' + j for row in names for i,j in row ]
+e6 = [ i + ' ' + j for row in names for i, j in row ]
 print(e6)

@@ -33,7 +33,7 @@ print(type(job_expertise))
 print(type(level))
 
 print(len(first_name))
-print(max(len(first_name),len(last_name)))
+print(max(len(first_name), len(last_name)))
 
 # Excercise 2
 num_one = 5

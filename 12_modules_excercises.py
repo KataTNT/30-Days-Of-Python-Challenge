@@ -12,11 +12,11 @@ from string import ascii_letters, digits
 def random_user_id():
     user_id = ''
     for i in range(6):
-        if randint(0,1) == 0:
-            digit_index = randint(0,9)
+        if randint(0, 1) == 0:
+            digit_index = randint(0, 9)
             user_id += digits[digit_index]
         else:
-            char_index = randint(0,25)
+            char_index = randint(0, 25)
             user_id += ascii_letters[char_index]
     return user_id
 
@@ -32,11 +32,11 @@ def user_id_gen_by_user():
     for x in range(num_id):
         user_id = ''
         for i in range(num_char):
-            if randint(0,1) == 0:
-                digit_index = randint(0,9)
+            if randint(0, 1) == 0:
+                digit_index = randint(0, 9)
                 user_id += digits[digit_index]
             else:
-                char_index = randint(0,25)
+                char_index = randint(0, 25)
                 user_id += ascii_letters[char_index]
         user_ids.append(user_id)
     return user_ids
@@ -46,9 +46,9 @@ for uid in user_id_gen_by_user():
 
 # 3. Write a function named rgb_color_gen. It will generate rgb colors (3 values ranging from 0 to 255 each).
 def rgb_color_gen():
-    r = randint(0,255)
-    g = randint(0,255)
-    b = randint(0,255)
+    r = randint(0, 255)
+    g = randint(0, 255)
+    b = randint(0, 255)
     return f'rgb({r},{g},{b})'
 
 print(rgb_color_gen())
@@ -62,11 +62,11 @@ def list_of_hexa_colors(number: int):
     for n in range(number):
         hexa_color = '#'
         for char in range(6):
-            if randint(0,1) == 0:
-                digit_index = randint(0,9)
+            if randint(0, 1) == 0:
+                digit_index = randint(0, 9)
                 hexa_color += digits[digit_index]
             else:
-                char_index = randint(0,5)
+                char_index = randint(0, 5)
                 hexa_color += alphabet_1st6[char_index]
         hexa_colors.append(hexa_color)
     return hexa_colors
@@ -97,7 +97,7 @@ print(generate_colors('rgb', 5))
 def shuffle_list(list: list):
     shuffled_list = []
     for item in list:
-        shuffled_list.insert(randint(0,len(shuffled_list)),item)
+        shuffled_list.insert(randint(0, len(shuffled_list)), item)
     return shuffled_list
 
 alphabet_list = list(ascii_letters[:25])
@@ -110,7 +110,7 @@ def random_unique_7_numbers():
     numbers = []
     index = 0
     while index < 7:
-        number = randint(0,9)
+        number = randint(0, 9)
         if number not in numbers:
             numbers.append(number)
             index += 1

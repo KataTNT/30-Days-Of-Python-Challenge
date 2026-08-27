@@ -1,19 +1,19 @@
 """
 Project: 30 Days Of Python challenge
 Author (Original): Asabeneh Yetayeh (https://github.com/Asabeneh/30-Days-Of-Python)
-Day: 13 - List Comprehension (https://github.com/Asabeneh/30-Days-Of-Python/blob/master/11_Day_Functions/11_functions.md)
+Day: 11 - Functions (https://github.com/Asabeneh/30-Days-Of-Python/blob/master/11_Day_Functions/11_functions.md)
 Challenger: KataTNT
 """
 
-from math import pi
 ## Exercises: Level 1
 # 1. Declare a function add_two_numbers. It takes two parameters and it returns a sum.
 def add_two_numbers(n1: int | float, n2: int | float):
     return n1 + n2
 
-print(add_two_numbers(1.6,5))
+print(add_two_numbers(1.6, 5))
 
 # 2. Area of a circle is calculated as follows: area = π x r x r. Write a function that calculates area_of_circle.
+from math import pi
 def area_of_circle(r):
     area = r * r * pi
     return area
@@ -32,7 +32,7 @@ def add_all_nums(*nums):
     return total 
 
 print(add_all_nums('hello', 2))
-print(add_all_nums(3,5,6,7,1))
+print(add_all_nums(3, 5, 6, 7, 1))
 
 # 4. Temperature in °C can be converted to °F using this formula: °F = (°C x 9/5) + 32. Write a function which converts °C to °F, convert_celsius_to_fahrenheit.
 def convert_celsius_to_fahrenheit(celsius):
@@ -45,7 +45,7 @@ print(convert_celsius_to_fahrenheit(30))
 def check_season(month: int):
     if month in [9, 10, 11]:
         return 'Spring'
-    elif month in [12, 1 ,2]:
+    elif month in [12, 1, 2]:
         return 'Summer'
     elif month in [3, 4, 5]:
         return 'Autumn'
@@ -76,7 +76,7 @@ def solve_quadratic_eqn(a, b, c):
         x2 = -b - sqrt(delta) / 2 * a
         print(f'The equation has two distinct roots.\nx1 = {x1}\nx2 = {x2}')
 
-solve_quadratic_eqn(2,3,1)
+solve_quadratic_eqn(2, 3, 1)
 
 # 8. Declare a function named print_list. It takes a list as a parameter and it prints out each element of the list.
 def print_list(array: list):
@@ -172,7 +172,7 @@ def evens_and_odds(number: int):
     else:
         odds = 0
         evens = 0
-        for n in range(1,number):
+        for n in range(1, number):
             if n % 2 != 0:
                 odds += 1
             else:
@@ -222,8 +222,7 @@ print(list_mean, '| Mean = ', calculate_mean(list_mean), '| Mean (statstics) = '
 
 # calculate_median
 def calculate_median(array: list):
-    temp = array
-    temp.sort()
+    temp = sorted(array)
     median_index = len(temp) // 2
     if len(temp) % 2 != 0:
         return temp[median_index]
@@ -256,11 +255,8 @@ print(list_mode, '| Mode = ', calculate_mode(list_mode), '| Mode (statistics) = 
 
 # calculate_range
 def calculate_range(array: list):
-    temp = array
-    temp.sort()
-    max_element = max(temp)
-    min_element = min(temp)
-    return max_element - min_element
+    sorted_array = sorted(array)
+    return max(sorted_array) - min(sorted_array)
 
 list_range = [5, 8, 2, 4, 3, 10]
 print(list_range, '| Range =', calculate_range(list_range))
@@ -303,3 +299,91 @@ def show_args(**args):
 
 show_args(name="Alice", age=30, city="New York")
 show_args(name="Bob", pet="Fluffy, the bunny")
+
+## Exercises: Level 3
+# 1. Write a function called is_prime, which checks if a number is prime.
+def is_prime(n: int):
+    if not isinstance(n, int):
+        print('Input n is not an integer!')
+        return
+    if n < 2:
+        return False
+    if n == 2:
+        return True
+    else:
+        i = 2
+        is_prime = True
+        while i <= sqrt(n) + 1:
+            if n % i == 0:
+                is_prime = False
+                break
+            else:
+                i += 1
+        return is_prime
+
+prime_list = []
+for i in range(100):
+    if is_prime(i):
+        prime_list.append(i)
+
+print(prime_list)
+
+# 2. Write a functions which checks if all items are unique in the list.
+def check_list_unique(array: list):
+    temp = sorted(array)
+    for i in range(len(array)):
+        if i == len(array) - 1:
+            return True
+        if temp[i] == temp[i + 1]:
+            return False
+    return True
+
+list_unique_numbers = [1, 2, 5, 8, 9, 10, 3, 6, 7, 4]
+print(check_list_unique(list_unique_numbers))
+            
+list_not_unique = ["tokyo", "london", "paris", "new york", "paris"]
+print(check_list_unique(list_not_unique))
+
+# 3. Write a function which checks if all the items of the list are of the same data type.
+def check_list_same_type(array: list):
+    first_type = type(array[0])
+    for i in array:
+        if type(i) == first_type:
+            continue
+        else:
+            return False
+    return True
+
+list_numbers = [1, 2, 5, 8, 9, 10, 3, 6, 7, 4]
+print(list_numbers, check_list_same_type(list_numbers))
+
+list_string = list('abcdef')
+print(list_string, check_list_same_type(list_string))
+
+list_multi_types = [1, 2, 'a', 3, 'c', ('rose', 'pink') ]
+print(list_multi_types, check_list_same_type(list_multi_types))    
+
+
+# 4. Write a function which check if provided variable is a valid python variable
+import string
+import keyword
+def is_valid_var(var):
+    valid_1st_char = string.ascii_letters + '_'
+    valid_char = valid_1st_char + string.digits
+    if var[0] not in valid_1st_char:
+        return False
+    for c in var:
+        if c not in valid_char:
+            return False
+    if keyword.iskeyword(var):
+        return False
+    return True
+
+print('_hello', is_valid_var('_hello'))
+print('2hello', is_valid_var('2hello'))
+print('hEll0_w0rld', is_valid_var('hEll0_w0rld'))
+print('import', is_valid_var('import'))
+
+# 5. Go to the data folder and access the countries-data.py file.
+# - Create a function called the most_spoken_languages in the world. It should return 10 or 20 most spoken languages in the world in descending order.
+# - Create a function called the most_populated_countries. It should return 10 or 20 most populated countries in descending order.
