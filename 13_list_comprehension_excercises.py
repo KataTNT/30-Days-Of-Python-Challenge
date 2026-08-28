@@ -18,8 +18,9 @@ e2 = [ number for row in list_of_lists for number in row]
 print(e2)
 
 # 3. Using list comprehension create the following list of tuples:
-e3 = [ (i, 1, i/1, i**2, i**3, i**4, i**5 ) for i in range(11)]
-print(e3)
+import pprint
+e3 = [ (i, i ** 0, i ** 1, i ** 2, i ** 3, i ** 4, i ** 5 ) for i in range(11)]
+pprint.pprint(e3)
 
 # 4. Flatten the following list to a new list:
 countries = [[('Finland', 'Helsinki')], [('Sweden', 'Stockholm')], [('Norway', 'Oslo')]]
