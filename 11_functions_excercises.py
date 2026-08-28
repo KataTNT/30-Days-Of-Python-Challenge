@@ -41,16 +41,15 @@ def convert_celsius_to_fahrenheit(celsius):
 print(convert_celsius_to_fahrenheit(30))
 
 # 5. Write a function called check-season, it takes a month parameter and returns the season: Autumn, Winter, Spring or Summer.
-# Note: At Southern Hemisphere
 def check_season(month: int):
     if month in [9, 10, 11]:
-        return 'Spring'
-    elif month in [12, 1, 2]:
-        return 'Summer'
-    elif month in [3, 4, 5]:
         return 'Autumn'
-    elif month in [6, 7, 8]:
+    elif month in [12, 1, 2]:
         return 'Winter'
+    elif month in [3, 4, 5]:
+        return 'Spring'
+    elif month in [6, 7, 8]:
+        return 'Summer'
     else:
         print(f'Month {month} is invalid.')
         return

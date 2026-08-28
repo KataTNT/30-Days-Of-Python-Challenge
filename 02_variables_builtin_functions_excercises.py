@@ -1,9 +1,9 @@
-###
-# Project: 30 Days Of Python challenge
-# Author (Original): Asabeneh Yetayeh (https://github.com/Asabeneh/30-Days-Of-Python)
-# Day: 2 - Variables, Builtin Functions (https://github.com/Asabeneh/30-Days-Of-Python/blob/master/02_Day_Variables_builtin_functions/02_variables_builtin_functions.md)
-# Challenger: KataTNT
-###
+"""
+Project: 30 Days Of Python challenge
+Author (Original): Asabeneh Yetayeh (https://github.com/Asabeneh/30-Days-Of-Python)
+Day: 2 - Variables, Builtin Functions (https://github.com/Asabeneh/30-Days-Of-Python/blob/master/02_Day_Variables_builtin_functions/02_variables_builtin_functions.md)
+Challenger: KataTNT
+"""
 
 # Excercise 1
 # Day 2: 30 Days of python programming'
