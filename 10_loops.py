@@ -104,8 +104,8 @@ print(f'The sum of all evens is {sum_evens}. And the sum of all odds is {sum_odd
 ## Exercises: Level 3
 # 1. Go to the data folder and use the countries.py file. Loop through the countries and extract all the countries containing the word land.
 import json
-file = open("./data/countries-data.py", mode="r", encoding="utf-8")
-countries_data = json.load(file)
+with open("./data/countries-data.py", mode="r", encoding="utf-8") as file:
+    countries_data = json.load(file)
 extract_countries = []
 
 for country in countries_data:
