@@ -102,9 +102,9 @@ for k in range(101):
 print(f'The sum of all evens is {sum_evens}. And the sum of all odds is {sum_odds}.')
 
 ## Exercises: Level 3
-# 1. Go to the data folder and use the countries.py file. Loop through the countries and extract all the countries containing the word land.
+# 1. Go to the data folder and use the countries_data.json file. Loop through the countries and extract all the countries containing the word land.
 import json
-with open("./data/countries-data.py", mode="r", encoding="utf-8") as file:
+with open("./data/countries_data.json", mode="r", encoding="utf-8") as file:
     countries_data = json.load(file)
 extract_countries = []
 
@@ -122,7 +122,7 @@ while index >= 0:
     index -= 1
 print(fruit, '==reverse==>', reversed_fruit)
 
-# 3. Go to the data folder and use the countries_data.py file.
+# 3. Go to the data folder and use the countries_data.json file.
 #   i. What are the total number of languages in the data
 counted_language = set()
 count = 0
