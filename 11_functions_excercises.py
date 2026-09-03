@@ -78,16 +78,16 @@ def solve_quadratic_eqn(a, b, c):
 solve_quadratic_eqn(2, 3, 1)
 
 # 8. Declare a function named print_list. It takes a list as a parameter and it prints out each element of the list.
-def print_list(array: list):
-    for element in array:
+def print_list(elements: list):
+    for element in elements:
         print(element)
 
 print(print_list([1, 2, 3]))
 
 # 9. Declare a function named reverse_list. It takes an array as a parameter and it returns the reverse of the array (use loops).
-def reverse_list(array: list):
+def reverse_list(elements: list):
     reversed_list = []
-    index = len(array)-1
+    index = len(elements)-1
     while index >= 0:
         reversed_list.append(list[index])
         index -= 1
@@ -97,17 +97,17 @@ print(reverse_list([1, 2, 3, 4, 5]))
 print(reverse_list(["A", "B", "C"])) 
 
 # 10. Declare a function named capitalize_list_items. It takes a list as a parameter and it returns a capitalized list of items
-def capitalize_list_items(array: list):
+def capitalize_list_items(elements: list):
     capitalized_list = []
-    for element in array:
+    for element in elements:
         capitalized_list.append(element.title())
     return capitalized_list
 
 print(capitalize_list_items(["ha noi", "ho chi minh", "da nang"]))
 
 # 11. Declare a function named add_item. It takes a list and an item parameters. It returns a list with the item added at the end.
-def add_item(array: list, item):
-    res = array
+def add_item(items: list, item):
+    res = items
     res.append(item)
     return res
 
@@ -117,8 +117,8 @@ numbers = [2, 3, 7, 9];
 print(add_item(numbers, 5))
 
 # 12. Declare a function named remove_item. It takes a list and an item parameters. It returns a list with the item removed from it.
-def remove_item(array: list, item):
-    res = array
+def remove_item(items: list, item):
+    res = items
     res.remove(item)
     return res
 
@@ -210,18 +210,18 @@ is_empty('Bingo')
 # 4. Write different functions which take lists. They should calculate_mean, calculate_median, calculate_mode, calculate_range, calculate_variance, calculate_std (standard deviation).
 import statistics
 # calculate_mean
-def calculate_mean(array: list):
+def calculate_mean(numbers: list):
     total = 0
-    for element in array:
-        total += element
-    return total  / len(array)
+    for number in numbers:
+        total += number
+    return total  / len(numbers)
 
 list_mean = [3, 13, 2, 34, 11, 17, 27, 47, 1]
 print(list_mean, '| Mean = ', calculate_mean(list_mean), '| Mean (statstics) = ', statistics.mean(list_mean))
 
 # calculate_median
-def calculate_median(array: list):
-    temp = sorted(array)
+def calculate_median(numbers: list):
+    temp = sorted(numbers)
     median_index = len(temp) // 2
     if len(temp) % 2 != 0:
         return temp[median_index]
@@ -236,46 +236,46 @@ list_median_2 = [3, 13, 2, 34, 11, 17, 27, 47, 1, 8]
 print(list_median_2, '| Median = ', calculate_median(list_median_2), '| Median (statstics) = ', statistics.median(list_median_2))
 
 # calculate_mode
-def calculate_mode(array: list):
+def calculate_mode(numbers: list):
     mode = None
     count_table = {}
-    for element in array:
-        if not element in count_table:
-            count_table[element] = 1
+    for number in numbers:
+        if not number in count_table:
+            count_table[number] = 1
         else:
-            count_table[element] += 1
-    for element, count in count_table.items():
+            count_table[number] += 1
+    for number, count in count_table.items():
         if count == max(count_table.values()):
-            mode = element
+            mode = number
             return mode
 
 list_mode = [1, 2, 3, 2, 5, 6, 3, 4, 1, 3, 2]
 print(list_mode, '| Mode = ', calculate_mode(list_mode), '| Mode (statistics) = ', statistics.mode(list_mode))
 
 # calculate_range
-def calculate_range(array: list):
-    sorted_array = sorted(array)
-    return max(sorted_array) - min(sorted_array)
+def calculate_range(numbers: list):
+    sorted_numbers = sorted(numbers)
+    return max(sorted_numbers) - min(sorted_numbers)
 
 list_range = [5, 8, 2, 4, 3, 10]
 print(list_range, '| Range =', calculate_range(list_range))
 # calculate_variance
-def calculate_variance(array: list):
-    mean = calculate_mean(array)
+def calculate_variance(numbers: list):
+    mean = calculate_mean(numbers)
     x = {}
-    for xi in array:
+    for xi in numbers:
         x[xi] = (xi - mean) ** 2
     total = 0
     for i, ss in x.items():
         total += ss
-    return total / (len(array) - 1)
+    return total / (len(numbers) - 1)
 
 list_variance = [10, 34, 23, 54, 9]
 print(list_variance, '| Variance =', calculate_variance(list_variance), '| Variance (statistics) =', statistics.variance(list_variance) )
 
 # calculate_std
-def calculate_std(array: list):
-    variance = calculate_variance(array)
+def calculate_std(numbers: list):
+    variance = calculate_variance(numbers)
     return sqrt(variance)
 
 list_standard_deviation = [5, 8, 2, 4, 3, 10]
@@ -328,10 +328,10 @@ for i in range(100):
 print(prime_list)
 
 # 2. Write a functions which checks if all items are unique in the list.
-def check_list_unique(array: list):
-    temp = sorted(array)
-    for i in range(len(array)):
-        if i == len(array) - 1:
+def check_list_unique(items: list):
+    temp = sorted(items)
+    for i in range(len(items)):
+        if i == len(items) - 1:
             return True
         if temp[i] == temp[i + 1]:
             return False
@@ -344,9 +344,9 @@ list_not_unique = ["tokyo", "london", "paris", "new york", "paris"]
 print(check_list_unique(list_not_unique))
 
 # 3. Write a function which checks if all the items of the list are of the same data type.
-def check_list_same_type(array: list):
-    first_type = type(array[0])
-    for i in array:
+def check_list_same_type(items: list):
+    first_type = type(items[0])
+    for i in items:
         if type(i) == first_type:
             continue
         else:
