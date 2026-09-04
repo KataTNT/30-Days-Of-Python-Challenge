@@ -262,15 +262,15 @@ print(list_range, '| Range =', calculate_range(list_range))
 # calculate_variance
 def calculate_variance(numbers: list):
     mean = calculate_mean(numbers)
-    x = {}
+    x = []
     for xi in numbers:
-        x[xi] = (xi - mean) ** 2
+        x.append((xi, (xi - mean) ** 2))
     total = 0
-    for i, ss in x.items():
+    for xi, ss in x:
         total += ss
     return total / (len(numbers) - 1)
 
-list_variance = [10, 34, 23, 54, 9]
+list_variance = [26, 27, 27, 24, 32, 33, 27, 25, 26, 38]
 print(list_variance, '| Variance =', calculate_variance(list_variance), '| Variance (statistics) =', statistics.variance(list_variance) )
 
 # calculate_std
