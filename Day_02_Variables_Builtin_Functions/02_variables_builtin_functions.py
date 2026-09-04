@@ -56,13 +56,13 @@ circum_of_circle = 2 * radius * math.pi
 print('Area = ', area_of_circle)
 print('Circumference = ', circum_of_circle)
 
-radius = float(input("Input radius:"))
+radius = float(input("Input radius: "))
 area_of_circle = radius * radius * math.pi
 print('Area of circle = ', area_of_circle)
 
-first_name = input("Fill first name:")
-last_name = input("Fill last name:")
-country = input("Fill country:")
-age  = input("Fill age:")
+first_name = input("Fill first name: ")
+last_name = input("Fill last name: ")
+country = input("Fill country: ")
+age  = input("Fill age: ")
 
 print(first_name, last_name, country, age)

@@ -386,7 +386,7 @@ print('import', is_valid_var('import'))
 # 5. Go to the data folder and access the countries_data.json file.
 # - Create a function called the most_spoken_languages in the world. It should return 10 or 20 most spoken languages in the world in descending order.
 import json
-with open("./data/countries_data.json", mode="r", encoding="utf-8") as file:
+with open("data/countries_data.json", mode="r", encoding="utf-8") as file:
     countries_data = json.load(file)
 def most_spoken_languages(countries_data, top_n=10):
     all_languages = []

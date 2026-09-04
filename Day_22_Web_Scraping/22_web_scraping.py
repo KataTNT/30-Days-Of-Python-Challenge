@@ -77,5 +77,5 @@ def scrape_bu_stats(url: str, output_path: Path) -> None:
         logger.error(f"Failed to write JSON file: {e}")
 
 BU_URL = "http://www.bu.edu/president/boston-university-facts-stats/"
-OUTPUT_FILE = Path('./output/bu-edu.json')
+OUTPUT_FILE = Path('./bu-edu.json')
 scrape_bu_stats(BU_URL, OUTPUT_FILE)
