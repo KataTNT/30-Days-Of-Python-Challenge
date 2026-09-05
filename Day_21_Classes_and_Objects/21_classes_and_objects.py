@@ -62,6 +62,20 @@ class Statistics:
     
     def std(self):
         return sqrt(self.var())
+
+    def freq_dist(self):
+        count_table = {}
+        for item in self.data:
+            if not item in count_table:
+                count_table[item] = 1
+            else:
+                count_table[item] += 1
+        result = []
+        for k, v in count_table.items():
+            count_self = self.count()
+            result.append((k, v / count_self * 100))
+        result.sort(key=lambda x: x[0])
+        return result
     
     def describe(self):
         print("Count:", self.count())
@@ -74,7 +88,7 @@ class Statistics:
         print("Mode:", self.mode())
         print("Standard Deviation:", self.std()) 
         print("Variance:", self.var()) 
-        # print("Frequency Distribution:", data.freq_dist())
+        print("Frequency Distribution:", self.freq_dist())
 
 ages = [31, 26, 34, 37, 27, 26, 32, 32, 26, 27, 27, 24, 32, 33, 27, 25, 26, 38, 37, 31, 34, 24, 33, 29, 26]
 data = Statistics(ages)
