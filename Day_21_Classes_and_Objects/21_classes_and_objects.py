@@ -6,7 +6,10 @@ Challenger: KataTNT
 """
 
 ## Exercise: Level 1
-# 1. Python has the module called statistics and we can use this module to do all the statistical calculations. However, to learn how to make function and reuse function let us try to develop a program, which calculates the measure of central tendency of a sample (mean, median, mode) and measure of variability (range, variance, standard deviation). In addition to those measures, find the min, max, count, percentile, and frequency distribution of the sample. You can create a class called Statistics and create all the functions that do statistical calculations as methods for the Statistics class. Check the output below.
+# 1. Python has the module called statistics and we can use this module to do all the statistical calculations. 
+# However, to learn how to make function and reuse function let us try to develop a program, which calculates the measure of central tendency of a sample (mean, median, mode) and measure of variability (range, variance, standard deviation). 
+# In addition to those measures, find the min, max, count, percentile, and frequency distribution of the sample. 
+# You can create a class called Statistics and create all the functions that do statistical calculations as methods for the Statistics class. Check the output below.
 from math import sqrt
 
 class Statistics:
@@ -66,7 +69,7 @@ class Statistics:
     def freq_dist(self):
         count_table = {}
         for item in self.data:
-            if not item in count_table:
+            if item not in count_table:
                 count_table[item] = 1
             else:
                 count_table[item] += 1
