@@ -41,6 +41,8 @@ def get_cat_breeds_data(output_file=None):
     else:
         return content
 
+# ii. Find the min, max, mean, median, standard deviation of cats" weight in metric units.
+# iii. Find the min, max, mean, median, standard deviation of cats" lifespan in years.
 def calculate_cat_statistics(cats_data: dict, type: str):
     if type not in ["life_span", "weight.metric", "height.metric"]:
         print("Invalid type!")
@@ -69,11 +71,11 @@ def calculate_cat_statistics(cats_data: dict, type: str):
     }
     print(f"- {type} stats:", element_stats)
 
-## Direct call API
-# first_cat = get_cat_breeds_data()[0]
-# print(first_cat)
+# Direct call API
+#first_cat = get_cat_breeds_data()[0]
+#print(first_cat)
 
-## Save response as a JSON file for rate limiting
+# Save response as a JSON file for rate limiting
 FILE_PATH = "data/cat_breeds.json"
 if not os.path.isfile(FILE_PATH):
     print("File does not exists. Creating file ...")
@@ -85,10 +87,7 @@ with open(FILE_PATH, "r", encoding="utf-8") as file:
     print(f"\nLoading data from file '{FILE_PATH}'.")
     cat_breeds_data = json.load(file)
 
-# ii. Find the min, max, mean, median, standard deviation of cats" weight in metric units.
 calculate_cat_statistics(cat_breeds_data, "weight.metric")
-
-# iii. Find the min, max, mean, median, standard deviation of cats" lifespan in years.
 calculate_cat_statistics(cat_breeds_data, "life_span")
 
 # iii. Create a frequency table of country and breed of cats
