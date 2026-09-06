@@ -41,6 +41,18 @@ def get_cat_breeds_data(output_file=None):
     else:
         return content
 
+# Direct call API
+#first_cat = get_cat_breeds_data()[0]
+#print(first_cat)
+
+# Save response as a JSON file for rate limiting
+FILE_PATH = "data/cat_breeds.json"
+if not os.path.isfile(FILE_PATH):
+    print("File does not exists. Creating file ...")
+    get_cat_breeds_data(output_file=FILE_PATH)
+else:
+    print(f"File '{FILE_PATH}' already exists.")
+
 # ii. Find the min, max, mean, median, standard deviation of cats" weight in metric units.
 # iii. Find the min, max, mean, median, standard deviation of cats" lifespan in years.
 def calculate_cat_statistics(cats_data: dict, type: str):
@@ -71,18 +83,7 @@ def calculate_cat_statistics(cats_data: dict, type: str):
     }
     print(f"- {type} stats:", element_stats)
 
-# Direct call API
-#first_cat = get_cat_breeds_data()[0]
-#print(first_cat)
-
-# Save response as a JSON file for rate limiting
-FILE_PATH = "data/cat_breeds.json"
-if not os.path.isfile(FILE_PATH):
-    print("File does not exists. Creating file ...")
-    get_cat_breeds_data(output_file=FILE_PATH)
-else:
-    print(f"File '{FILE_PATH}' already exists.")
-
+# Loading data from JSON file
 with open(FILE_PATH, "r", encoding="utf-8") as file:
     print(f"\nLoading data from file '{FILE_PATH}'.")
     cat_breeds_data = json.load(file)
