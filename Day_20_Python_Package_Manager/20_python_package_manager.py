@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 import requests
 import statistics as stats
 import json
+from pprint import pprint
 
 ## Exercises:
 # 2. Read the cats API and cats_api = "https://api.thecatapi.com/v1/breeds":
@@ -55,33 +56,33 @@ else:
 
 # ii. Find the min, max, mean, median, standard deviation of cats" weight in metric units.
 # iii. Find the min, max, mean, median, standard deviation of cats" lifespan in years.
-def calculate_cat_statistics(cats_data: dict, type: str):
-    if type not in ["life_span", "weight.metric", "height.metric"]:
-        print("Invalid type!")
+def calculate_cat_statistics(cat_breeds_data: dict, property: str):
+    if property not in ["life_span", "weight.metric", "height.metric"]:
+        print("Invalid property!")
         return
-    elements = []
-    for cat in cats_data:
+    properties = []
+    for breed in cat_breeds_data:
         try:
-            if "." not in type:
-                e_parts = cat[type].split("-")
+            if "." not in property:
+                e_parts = breed[property].split("-")
                 e_min, e_max = map(int, e_parts)
-                elements.extend([e_min, e_max])
-            elif len(type.split(".")) == 2:
-                parent_path, child_path = type.split(".")
-                if isinstance(cat[parent_path], dict) and len(cat[parent_path]) == 2:
-                    e_parts = cat[parent_path][child_path].split("-")
+                properties.extend([e_min, e_max])
+            elif len(property.split(".")) == 2:
+                parent_path, child_path = property.split(".")
+                if isinstance(breed[parent_path], dict) and len(breed[parent_path]) == 2:
+                    e_parts = breed[parent_path][child_path].split("-")
                     e_min, e_max = map(float, e_parts)
-                    elements.extend([e_min, e_max])
+                    properties.extend([e_min, e_max])
         except (ValueError, AttributeError):
             pass
-    element_stats = {
-        "min": min(elements),
-        "max": max(elements),
-        "mean": stats.mean(elements),
-        "median": stats.median(elements),
-        "standard deviation": round(stats.stdev(elements), 3)
+    property_stats = {
+        "min": min(properties),
+        "max": max(properties),
+        "mean": stats.mean(properties),
+        "median": stats.median(properties),
+        "standard deviation": round(stats.stdev(properties), 3)
     }
-    print(f"- {type} stats:", element_stats)
+    print(f"- {property} stats:", property_stats)
 
 # Loading data from JSON file
 with open(FILE_PATH, "r", encoding="utf-8") as file:
@@ -92,3 +93,22 @@ calculate_cat_statistics(cat_breeds_data, "weight.metric")
 calculate_cat_statistics(cat_breeds_data, "life_span")
 
 # iii. Create a frequency table of country and breed of cats
+def cat_breeds_freq_dist(cat_breeds_data: dict, property: str):
+    count_table = {}
+    for breed in cat_breeds_data:
+        if breed[property] not in count_table:
+            count_table[breed[property]] = 1
+        else:
+            count_table[breed[property]] += 1
+    result = []
+    cat_breeds_count = len(cat_breeds_data)
+    for k, v in count_table.items():
+        result.append((k, round(v / cat_breeds_count * 100, 2)))
+    result.sort(key=lambda x: x[1], reverse=True)
+    return result
+
+print("\nFrequency table of country of cats:")
+pprint(cat_breeds_freq_dist(cat_breeds_data, "country_code"))
+print("\nFrequency table of breed of cats:")
+pprint(cat_breeds_freq_dist(cat_breeds_data, "breed_group"))
+        
