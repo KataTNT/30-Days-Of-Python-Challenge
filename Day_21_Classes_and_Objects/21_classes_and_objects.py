@@ -71,8 +71,8 @@ class Statistics:
             else:
                 count_table[item] += 1
         result = []
+        count_self = self.count()
         for k, v in count_table.items():
-            count_self = self.count()
             result.append((k, v / count_self * 100))
         result.sort(key=lambda x: x[0])
         return result
