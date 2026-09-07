@@ -49,7 +49,7 @@ def get_cat_breeds_data(output_file=None):
 #print(first_cat)
 
 # Save response as a JSON file for rate limiting
-FILE_PATH = "data/cat_breeds.json"
+FILE_PATH = "output/cat_breeds.json"
 if not os.path.isfile(FILE_PATH):
     print("File does not exists. Creating file ...")
     get_cat_breeds_data(output_file=FILE_PATH)
