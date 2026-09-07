@@ -1,7 +1,7 @@
 """
 Project: 30 Days Of Python challenge
 Author (Original): Asabeneh Yetayeh (https://github.com/Asabeneh/30-Days-Of-Python)
-Day: 20 - PIP (https://github.com/Asabeneh/30-Days-Of-Python/blob/master/20_Day_Python_package_manager/20_python_package_manager.md
+Day: 20 - PIP (https://github.com/Asabeneh/30-Days-Of-Python/blob/master/20_Day_Python_package_manager/20_python_package_manager.md)
 Challenger: KataTNT
 """
 
@@ -11,6 +11,8 @@ import requests
 import statistics as stats
 import json
 from pprint import pprint
+from bs4 import BeautifulSoup
+import re
 
 ## Exercises:
 # 2. Read the cats API and cats_api = "https://api.thecatapi.com/v1/breeds":
@@ -111,4 +113,64 @@ print("\nFrequency table of country of cats:")
 pprint(cat_breeds_freq_dist(cat_breeds_data, "country_code"))
 print("\nFrequency table of breed of cats:")
 pprint(cat_breeds_freq_dist(cat_breeds_data, "breed_group"))
+
+# 4. UCI is one of the most common places to get data sets for data science and machine learning. 
+# Read the content of UCL (https://archive.ics.uci.edu/ml/datasets.php). Without additional libraries it will be difficult, so you may try it with BeautifulSoup4
+def get_data_uci(output_file=None, data_take=None):
+    if data_take is None:
+        url = "https://archive.ics.uci.edu/ml/datasets"
+    else:
+        url = "https://archive.ics.uci.edu/datasets?skip=0&take=" + str(data_take)
+
+    headers = {
+        "User-Agent": "ScrapeBot/1.0 (https://github.com/KataTNT/30-Days-Of-Python-Challenge; tnt.kata1894@gmail.com) python-requests/2.32.2"
+    }
+
+    try:
+        with requests.Session() as session:
+            response = session.get(url, headers=headers, timeout=10)
+            response.raise_for_status()
+        content = response.content
+        soup = BeautifulSoup(content, "html.parser")
+    except requests.exceptions.RequestException as e:
+        print(f"Failed to fetch URL: {e}")
+        return
+
+    data = []
+    section = soup.select_one(".flex .flex-col .gap-1")
+    rows = section.find_all("div", attrs={"role": "row"})
+    for index, row in enumerate(rows):
+        title = row.find("h2", class_="text-primary").getText(strip=True)
+        description = row.find("p", class_="mr-8").getText(strip=True)
+        properties = row.find_all("span", class_="truncate")
+        tasks, ds_chars, instances, features = [ 
+            re.sub(r"<.*?>", "", str(item)).strip() for item in properties
+        ]
         
+        tasks = [task.strip(',') for task in tasks.split()]
+        ds_chars = [ds_char.strip(',') for ds_char in ds_chars.split()]
+        instances = instances[:-10]
+        features = features[:-9]
+
+        data.append({
+            "Dataset Title": title,
+            "Overview": {
+                "Description": description,
+                "Associated Tasks": tasks,
+                "Dataset Characteristics": ds_chars,
+                "Instances": instances,
+                "Features": features
+            }
+        })
+
+    if output_file:
+        try:
+            with open(output_file, "w", encoding="utf-8") as file:
+                json.dump(data, file, ensure_ascii=False, indent=4)
+                print(f"Data successfully saved to '{output_file}'.")
+        except IOError as e:
+            print(f"Failed to write JSON file: {e}")
+    else:
+        return data
+
+get_data_uci(output_file="output/uci-dataset.json", data_take=50)
