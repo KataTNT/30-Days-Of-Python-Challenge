@@ -123,7 +123,7 @@ def get_data_uci(output_file=None, data_take=None):
         url = "https://archive.ics.uci.edu/datasets?skip=0&take=" + str(data_take)
 
     headers = {
-        "User-Agent": "ScrapeBot/1.0 (https://github.com/KataTNT/30-Days-Of-Python-Challenge; tnt.kata1894@gmail.com) python-requests/2.32.2"
+        "User-Agent": "ScrapeBot/1.0 (https://github.com/KataTNT/30-Days-Of-Python-Challenge; tnt.kata1894@gmail.com) python-requests/2.34.2"
     }
 
     try:
